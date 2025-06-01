@@ -1,0 +1,67 @@
+from IPython.core.display import display, HTML
+from IPython.display import clear_output
+
+# --- CSS + HTML UI ---
+ui_html = """
+<style>
+    body {
+        background-color: #f0f9ff;
+        font-family: Arial, sans-serif;
+    }
+    .chatbox {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        color: #0077cc;
+    }
+    label, input, button {
+        font-size: 16px;
+    }
+    input[type=text] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    button {
+        padding: 10px 15px;
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .response {
+        margin-top: 20px;
+        background-color: #e6f7ff;
+        padding: 15px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="chatbox">
+    <h2>🤖 Health AI Assistant</h2>
+    <form action="#" method="post">
+        <label for="symptoms">Enter your symptoms:</label>
+        <input type="text" id="symptoms" name="symptoms" placeholder="e.g., fever, headache">
+        <button onclick="google.colab.kernel.invokeFunction('notebook.process_symptoms', [document.getElementById('symptoms').value], {})">Submit</button>
+    </form>
+    <div class="response" id="responseText"></div>
+</div>
+
+<script>
+    document.querySelector('form').onsubmit = function(e) {
+        e.preventDefault();
+        const symptoms = document.getElementById("symptoms").value;
+        google.colab.kernel.invokeFunction('notebook.process_symptoms', [symptoms], {});
+    }
+</script>
+"""
+
+display(HTML(ui_html))
