@@ -1,0 +1,152 @@
+from google.colab import output
+from IPython.display import display, HTML
+
+def process_symptoms(symptoms):
+    symptoms = symptoms.lower()
+    response = "Sorry, I couldn't understand your symptoms clearly. Please consult a healthcare professional for a proper diagnosis."
+
+    if "fever" in symptoms:
+        if "cough" in symptoms or "cold" in symptoms or "sore throat" in symptoms:
+            response = (
+                "🦠 You might have a viral infection or common cold.\n"
+                "🏡 Home Remedies: Rest, stay hydrated, drink warm fluids like herbal tea, use a humidifier.\n"
+                "💊 Allopathic Medicines (consult a doctor first): Paracetamol (acetaminophen) for fever and pain, cough syrups like dextromethorphan."
+            )
+        elif "rash" in symptoms:
+            response = (
+                "🦠 Fever with rash could indicate infections like measles or dengue. See a doctor urgently.\n"
+                "🏡 Home Remedies: Avoid scratching, stay hydrated.\n"
+                "💊 Allopathic Medicines: None - requires urgent medical evaluation."
+            )
+        elif "headache" in symptoms and "body ache" in symptoms:
+            response = (
+                "🦠 Fever with headache and body ache could be flu or dengue fever.\n"
+                "🏡 Home Remedies: Rest, drink fluids.\n"
+                "💊 Allopathic Medicines: Paracetamol for fever and pain relief. Avoid NSAIDs in dengue without doctor advice."
+            )
+        else:
+            response = (
+                "🦠 Fever detected.\n"
+                "🏡 Home Remedies: Stay hydrated, rest, use cool compress.\n"
+                "💊 Allopathic Medicines: Paracetamol for fever."
+            )
+
+    elif "cough" in symptoms:
+        if "shortness of breath" in symptoms or "chest pain" in symptoms:
+            response = (
+                "⚠️ These symptoms might indicate pneumonia or serious lung conditions.\n"
+                "🏡 Home Remedies: None - seek immediate medical care.\n"
+                "💊 Allopathic Medicines: To be prescribed by a doctor (may include antibiotics or inhalers)."
+            )
+        elif "sore throat" in symptoms:
+            response = (
+                "🤧 Possible throat infection or common cold.\n"
+                "🏡 Home Remedies: Gargle warm salt water, drink warm fluids.\n"
+                "💊 Allopathic Medicines: Throat lozenges, acetaminophen or ibuprofen for pain."
+            )
+        else:
+            response = (
+                "🤧 Cough detected.\n"
+                "🏡 Home Remedies: Stay hydrated, use honey with warm water, rest.\n"
+                "💊 Allopathic Medicines: Cough syrups (e.g., dextromethorphan) or expectorants."
+            )
+
+    elif "headache" in symptoms:
+        if "nausea" in symptoms or "vomiting" in symptoms:
+            response = (
+                "🤕 Possible migraine or serious conditions.\n"
+                "🏡 Home Remedies: Rest in a dark room, cold compress.\n"
+                "💊 Allopathic Medicines: Migraine-specific meds (e.g., triptans), acetaminophen or NSAIDs."
+            )
+        elif "vision changes" in symptoms:
+            response = (
+                "⚠️ Headache with vision changes can be serious.\n"
+                "🏡 Home Remedies: None - seek immediate medical attention.\n"
+                "💊 Allopathic Medicines: To be evaluated by a doctor."
+            )
+        else:
+            response = (
+                "🤕 Headache noted.\n"
+                "🏡 Home Remedies: Hydrate, rest, avoid screens.\n"
+                "💊 Allopathic Medicines: Acetaminophen or NSAIDs."
+            )
+
+    elif "stomach pain" in symptoms or "abdominal pain" in symptoms:
+        if "diarrhea" in symptoms or "vomiting" in symptoms:
+            response = (
+                "🍲 Possible stomach infection or food poisoning.\n"
+                "🏡 Home Remedies: Drink ORS, eat bland foods.\n"
+                "💊 Allopathic Medicines: Oral rehydration salts, antiemetics (like ondansetron), and antibiotics if prescribed."
+            )
+        elif "constipation" in symptoms:
+            response = (
+                "🍲 Constipation detected.\n"
+                "🏡 Home Remedies: Increase fiber, drink water.\n"
+                "💊 Allopathic Medicines: Laxatives like polyethylene glycol."
+            )
+        else:
+            response = (
+                "🍲 Abdominal discomfort noted.\n"
+                "🏡 Home Remedies: Warm compress, avoid heavy meals.\n"
+                "💊 Allopathic Medicines: Antacids or pain relievers as advised."
+            )
+
+    elif "diarrhea" in symptoms:
+        response = (
+            "🍲 Diarrhea can cause dehydration.\n"
+            "🏡 Home Remedies: Drink ORS, avoid caffeine and dairy.\n"
+            "💊 Allopathic Medicines: Oral rehydration salts, anti-diarrheal meds like loperamide (use cautiously)."
+        )
+
+    elif "fatigue" in symptoms or "tired" in symptoms or "weakness" in symptoms:
+        response = (
+            "💤 Fatigue can have many causes.\n"
+            "🏡 Home Remedies: Sleep well, eat balanced diet, hydrate.\n"
+            "💊 Allopathic Medicines: Depends on cause; supplements like iron or vitamins if prescribed."
+        )
+
+    elif "chest pain" in symptoms:
+        response = (
+            "⚠️ Chest pain can indicate cardiac issues.\n"
+            "🏡 Home Remedies: None - seek emergency care immediately.\n"
+            "💊 Allopathic Medicines: Emergency treatment only."
+        )
+
+    elif "rash" in symptoms or "itching" in symptoms:
+        response = (
+            "🩹 Skin rash or itching.\n"
+            "🏡 Home Remedies: Cool compress, avoid scratching.\n"
+            "💊 Allopathic Medicines: Antihistamines, topical corticosteroids."
+        )
+
+    elif "anxiety" in symptoms or "depression" in symptoms or "stress" in symptoms:
+        response = (
+            "🧠 Mental health symptoms.\n"
+            "🏡 Home Remedies: Relaxation techniques, meditation.\n"
+            "💊 Allopathic Medicines: Antidepressants or anxiolytics prescribed by psychiatrist."
+        )
+
+    elif "dizziness" in symptoms or "lightheaded" in symptoms:
+        response = (
+            "⚠️ Dizziness.\n"
+            "🏡 Home Remedies: Hydrate, avoid sudden movements.\n"
+            "💊 Allopathic Medicines: Depends on cause; consult doctor."
+        )
+
+    elif "joint pain" in symptoms or "body ache" in symptoms:
+        response = (
+            "🦴 Joint or body pain.\n"
+            "🏡 Home Remedies: Warm compress, gentle stretches.\n"
+            "💊 Allopathic Medicines: NSAIDs like ibuprofen or naproxen."
+        )
+
+    else:
+        response = "Sorry, your symptoms are unclear. Please consult a healthcare professional for accurate diagnosis."
+
+    # Update UI
+    js = f"""
+    document.getElementById("responseText").innerText = `{response}`;
+    """
+    display(HTML(f"<script>{js}</script>"))
+
+output.register_callback('notebook.process_symptoms', process_symptoms)
